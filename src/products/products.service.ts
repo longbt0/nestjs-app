@@ -29,7 +29,10 @@ export class ProductsService {
     return product;
   }
 
-  async update(id: number, updateProductDto: UpdateProductDto): Promise<Product> {
+  async update(
+    id: number,
+    updateProductDto: UpdateProductDto,
+  ): Promise<Product> {
     const product = await this.findOne(id);
     Object.assign(product, updateProductDto);
     return await this.productsRepository.save(product);

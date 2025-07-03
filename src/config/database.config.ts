@@ -12,4 +12,4 @@ export const databaseConfig: TypeOrmModuleOptions = {
   entities: [User, Product],
   synchronize: process.env.NODE_ENV !== 'production', // Auto create tables in development
   logging: process.env.NODE_ENV !== 'production',
-}; 
+};

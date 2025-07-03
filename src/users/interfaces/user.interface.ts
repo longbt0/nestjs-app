@@ -7,4 +7,4 @@ export interface User {
   address?: string;
   createdAt: Date;
   updatedAt: Date;
-} 
+}

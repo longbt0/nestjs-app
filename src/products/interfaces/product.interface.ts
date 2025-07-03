@@ -7,4 +7,4 @@ export interface Product {
   stock?: number;
   createdAt: Date;
   updatedAt: Date;
-} 
+}

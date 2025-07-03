@@ -1,9 +1,23 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe, HttpCode, HttpStatus } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  HttpCode,
+  HttpStatus,
+  UsePipes,
+} from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { ParsePositiveIntPipe } from '../common/pipes/parse-positive-int.pipe';
+import { TrimPipe } from '../common/pipes/trim.pipe';
 
 @Controller('users')
+@UsePipes(TrimPipe)
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
@@ -19,18 +33,21 @@ export class UsersController {
   }
 
   @Get(':id')
-  findOne(@Param('id', ParseIntPipe) id: number) {
+  findOne(@Param('id', ParsePositiveIntPipe) id: number) {
     return this.usersService.findOne(id);
   }
 
   @Patch(':id')
-  update(@Param('id', ParseIntPipe) id: number, @Body() updateUserDto: UpdateUserDto) {
+  update(
+    @Param('id', ParsePositiveIntPipe) id: number,
+    @Body() updateUserDto: UpdateUserDto,
+  ) {
     return this.usersService.update(id, updateUserDto);
   }
 
   @Delete(':id')
   @HttpCode(HttpStatus.NO_CONTENT)
-  remove(@Param('id', ParseIntPipe) id: number) {
+  remove(@Param('id', ParsePositiveIntPipe) id: number) {
     return this.usersService.remove(id);
   }
 }
