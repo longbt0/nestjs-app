@@ -4,10 +4,12 @@ import {
   IsOptional,
   IsString,
   MinLength,
+  IsEnum,
 } from 'class-validator';
 import { IsStrongPassword } from '../../common/validators/is-strong-password.validator';
 import { IsVietnamesePhoneNumber } from '../../common/validators/is-phone-number.validator';
 import { SanitizeHtml, Capitalize, ToLowerCase } from '../../common/decorators/sanitize.decorator';
+import { Role } from '../../common/enums/role.enum';
 
 export class CreateUserDto {
   @IsNotEmpty({ message: 'Name is required' })
@@ -36,4 +38,8 @@ export class CreateUserDto {
   @IsString({ message: 'Address must be a string' })
   @SanitizeHtml()
   address?: string;
+
+  @IsOptional()
+  @IsEnum(Role, { message: 'Role must be a valid role (user, admin, moderator)' })
+  role?: Role;
 }

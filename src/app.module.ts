@@ -6,9 +6,10 @@ import { CatsController } from './cats/cats.controller';
 import { UsersModule } from './users/users.module';
 import { ProductsModule } from './products/products.module';
 import { databaseConfig } from './config/database.config';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
-  imports: [TypeOrmModule.forRoot(databaseConfig), UsersModule, ProductsModule],
+  imports: [TypeOrmModule.forRoot(databaseConfig), UsersModule, ProductsModule, AuthModule],
   controllers: [AppController, CatsController],
   providers: [AppService],
 })
